@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/navigator/ScreensStack/HomeScreen';
 import TiendaScreen from './src/navigator/ScreensStack/TiendaScreen';
-import DetailsScreen from './src/navigator/ScreensStack/DetailsScreen';
+import CitasScreen from './src/navigator/ScreensStack/CitasScreen';
 import APIScreen from './src/navigator/ScreensStack/APIScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const Tab = createBottomTabNavigator();
@@ -22,7 +22,7 @@ export default function App() {
       />
       <Tab.Screen 
         name="Citas" 
-        component={DetailsScreen}options={{tabBarLabel: 'Citas',tabBarIcon: ({ color, size }) => (
+        component={CitasScreen}options={{tabBarLabel: 'Citas',tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-details" color={color} size={size} />
           ),
         }} 
