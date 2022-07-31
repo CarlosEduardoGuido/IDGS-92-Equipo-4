@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 /* importamos los componentes de react */
 import {view,ActivityIndicator} from 'react-native';
 /* Importamso NativeBase */
-import {Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, NativeBaseProvider } from "native-base";
+import {Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, Image,NativeBaseProvider, Card, ScrollView, Button } from "native-base";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
+const baseUrl = "https://consultorio.consultoriosmilestoluca.com/";
 const  APIScreen = () =>{
     /* loading */
     const [isLoading, setLoading] = useState(true);
@@ -13,10 +14,10 @@ const  APIScreen = () =>{
     /* declaramos nuestro statda date en un state vacio  */
     const [data, setData] = useState([]);
     /* Funcion para obtener en la fake api las movies */
-    const getPersonajes = async () => {
+    const getProductos = async () => {
       try {
       //const response = await fetch('https://reactnative.dev/movies.json');
-      const response = await fetch('https://www.breakingbadapi.com/api/characters');
+      const response = await fetch( baseUrl + 'productos',{method:'GET',});
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -26,50 +27,35 @@ const  APIScreen = () =>{
     }
  }
  /* inicializamos nuestro useEffect */
- useEffect(() => {getPersonajes();}, []);
+ useEffect(() => {getProductos();}, []);
 
     return(
 
     <NativeBaseProvider>
-      <Box>
-          <Heading fontSize="xl" p="4" pb="3">
-            Personajes Breaking Bad
-          </Heading>
-          <FlatList data={data} renderItem={({
-          item
-        }) => <Box borderBottomWidth="1" _dark={{
-          borderColor: "muted.50"
-        }} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]} py="2">
-                <HStack space={[2, 3]} justifyContent="space-between">
-                  <Avatar size="60px" source={{
-              uri: item.img
-            }} />
-                  <VStack>
-                    <Text _dark={{
-                color: "warmGray.50"
-              }} color="coolGray.800" bold>
-                      Nombre: {item.name}
-                    </Text>
-                    <Text color="coolGray.600" _dark={{
-                color: "warmGray.200"
-              }}>
-                      Ocupacion: {item.occupation}
-                    </Text>
-                    <Text color="coolGray.600" _dark={{
-                color: "warmGray.200"
-              }}>
-                      Apodo: {item.nickname}
-                    </Text>
-                  </VStack>
-                  <Spacer />
-                  <Text fontSize="xs" _dark={{
-              color: "warmGray.50"
-            }} color="coolGray.800" alignSelf="flex-start">
-                    {item.id}
-                  </Text>
-                </HStack>
-              </Box>} keyExtractor={item => item.id} />
-        </Box>
+            <FlatList data={data} renderItem={({
+            item
+          }) => <Box Box flex={1} bg="#FFFFFF" alignItems="center" justifyContent="center">
+                  <Box bg="#FFFFFF">
+                    <Card>
+                      <Center>
+                        <Image source={{uri: item.imagen}} alt="image" style={{height: 180, width:160}}/>
+                      </Center>
+                      <VStack space="2.5" mt="4" px="10">
+                        <Heading size="sm">
+                          <Text >Nombre: {item.nombre}</Text>
+                        </Heading>
+                          <Text >Detalles: {item.detalles} </Text>
+                        <Heading size="sm">
+                          <Text>Precio: $ {item.precio} </Text>
+                        </Heading>
+                        <Button leftIcon={<MaterialCommunityIcons  size={15} name="cart" type="Ionicons" color="white" />}
+                        colorScheme="blue">
+                        Agregar
+                        </Button>
+                      </VStack> 
+                    </Card>
+                  </Box>
+                </Box>} keyExtractor={item => item.id} />
     </NativeBaseProvider>
     );
 };
