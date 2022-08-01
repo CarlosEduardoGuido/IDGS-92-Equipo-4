@@ -34,26 +34,29 @@ const  APIScreen = () =>{
     <NativeBaseProvider>
             <FlatList data={data} renderItem={({
             item
-          }) => <Box Box flex={1} bg="#FFFFFF" alignItems="center" justifyContent="center">
-                  <Box bg="#FFFFFF">
-                    <Card>
-                      <Center>
-                        <Image source={{uri: item.imagen}} alt="image" style={{height: 180, width:160}}/>
-                      </Center>
-                      <VStack space="2.5" mt="4" px="10">
-                        <Heading size="sm">
-                          <Text >Nombre: {item.nombre}</Text>
-                        </Heading>
-                          <Text >Detalles: {item.detalles} </Text>
-                        <Heading size="sm">
-                          <Text>Precio: $ {item.precio} </Text>
-                        </Heading>
-                        <Button leftIcon={<MaterialCommunityIcons  size={15} name="cart" type="Ionicons" color="white" />}
-                        colorScheme="blue">
-                        Agregar
-                        </Button>
-                      </VStack> 
-                    </Card>
+          }) => 
+                <Box alignItems="center">
+                  <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" >
+                    <Box bg="#FFFFFF">
+                      <Card>
+                        <Center>
+                          <Image source={{uri: item.imagen}} alt="image" style={{height: 180, width:160}}/>
+                        </Center>
+                        <VStack space="2.5" mt="4" px="10">
+                          <Heading size="sm">
+                            <Text >{item.nombre}</Text>
+                          </Heading>
+                            <Text >{item.detalles} </Text>
+                          <Heading size="sm">
+                            <Text>$ {item.precio} </Text>
+                          </Heading>
+                          <Button leftIcon={<MaterialCommunityIcons  size={15} name="cart" type="Ionicons" color="white" />}
+                          colorScheme="blue">
+                          Agregar
+                          </Button>
+                        </VStack> 
+                      </Card>
+                    </Box>
                   </Box>
                 </Box>} keyExtractor={item => item.id} />
     </NativeBaseProvider>
