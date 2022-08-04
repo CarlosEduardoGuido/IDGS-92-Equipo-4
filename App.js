@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/navigator/ScreensStack/HomeScreen';
 import TiendaScreen from './src/navigator/ScreensStack/TiendaScreen';
 import CitasScreen from './src/navigator/ScreensStack/CitasScreen';
-import APIScreen from './src/navigator/ScreensStack/APIScreen';
+import DoctoresScreen from './src/navigator/ScreensStack/DoctoresScreen';
+import EspecialidadesScreen from './src/navigator/ScreensStack/EspecialidadesScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const Tab = createBottomTabNavigator();
 
@@ -29,16 +30,25 @@ export default function App() {
       />
       
       <Tab.Screen 
-        name="TIENDA SMILE'S" 
+        name="Tienda" 
         component={TiendaScreen}options={{tabBarLabel: 'Tienda',tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cart" color={color} size={size} />
           ),
         }} 
       />
-          <Tab.Screen 
-        name="API" 
-        component={APIScreen}options={{tabBarLabel: 'Api',tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="api" color={color} size={size} />
+
+      <Tab.Screen 
+        name="Doctores" 
+        component={DoctoresScreen}options={{tabBarLabel: 'Doctores',tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="doctor" color={color} size={size} />
+          ),
+        }} 
+      />
+
+      <Tab.Screen 
+        name="Especialidades" 
+        component={EspecialidadesScreen}options={{tabBarLabel: 'Especialidades',tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="tooth" color={color} size={size} />
           ),
         }} 
       />

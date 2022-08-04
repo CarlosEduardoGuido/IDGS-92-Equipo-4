@@ -1,46 +1,78 @@
 /* importar react  */
-import React from 'react';
-import {ScrollView,Text,View} from 'react-native';
-/* importarmos  NativeBaseProvider  */
-import { useToast } from 'native-base';
-import { NativeBaseProvider, Box ,Image,AspectRatio,Stack,Button,Heading,color,Card,VStack,Center, Container} from "native-base";
+import React, { useEffect, useState } from 'react';
+import {Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, Image,NativeBaseProvider, Card, ScrollView, Button, AspectRatio, Stack } from "native-base";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
+const baseUrl = "https://consultorio.consultoriosmilestoluca.com/";
 const  HomeScreen = () =>{
-  const toast = useToast();
-    return(
-      <NativeBaseProvider>
-       
+    /* loading */
+    const [isLoading, setLoading] = useState(true);
 
-        <Box flex={1} bg="#C9F4E9" alignItems="center" justifyContent="center">
-      <Stack p="4" space={3}>
-            <Stack >
-            <Heading size="lg" ml="-1">
-            Consultorio smails
-            </Heading>
-          </Stack>
-          </Stack>
-              
-       <Image   size={100} resizeMode={"contain"} borderRadius={100}  source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvHv0JjhqNVW0gBMgzF7JUmfSGsapMzsdB0Q&usqp=CAU"}} alt="Alternate Text"/>
-             <Stack p="9" space={5}>
-            <Stack>
-              <Text fontSize="6xl"> Somos un consultorio que tabajamos profesionalmente con todo tipo de trabajo referenciado con cuidados bucales</Text>       
-            </Stack>
-          <Stack>
-          <Text fontSize="6xl">telefono:7227544600</Text>
-          </Stack>
-        <Stack>
-        <Text fontSize="6xl">Gmail: consultorio_smiles1955@outlook.com</Text>
-        </Stack>
-          </Stack>  
-      </Box>
-  
-          
-                    
-                      
-               
-            </NativeBaseProvider>
-        );
-}
+    /* declaramos nuestro statda date en un state vacio  */
+    const [data, setData] = useState([]);
+    /* Funcion para obtener en la fake api las movies */
+    const getInicio = async () => {
+      try {
+      //const response = await fetch('https://reactnative.dev/movies.json');
+      const response = await fetch( baseUrl + 'inicio',{method:'GET',});
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+ }
+ /* inicializamos nuestro useEffect */
+ useEffect(() => {getInicio();}, []);
+
+    return(
+
+    <NativeBaseProvider>
+            <FlatList data={data} renderItem={({
+            item
+          }) => 
+                <Box alignItems="center" flex={1}>
+                    <Box bg="#FFFFFF">
+                        <Center>
+                          <Heading size="xl">
+                            {item.titulo}
+                          </Heading>
+                        </Center>
+                        <Center>
+                          <Image source={{uri: item.imagen}} alt="fallback text" size={200} borderRadius={100}/>
+                        </Center>
+                        <VStack space="2.5" mt="4" px="10">
+                          <Heading size="sm">
+                            <Text>{item.descripcion}</Text>
+                          </Heading>
+                          <Center>
+                          <Heading size="sm">
+                            Mision
+                          </Heading >
+                          </Center>
+                          <Text >{item.mision}</Text>
+                          <Center>
+                          <Heading size="sm">
+                            Vision
+                          </Heading>
+                          </Center>
+                          <Text >{item.vision} </Text>
+                          <Center>
+                          <Heading size="sm">
+                            Valores
+                          </Heading> 
+                          </Center>
+                          <Text>{item.valores} </Text>
+                          <Heading size="sm">Direccion</Heading><Text>{item.direccion} </Text>
+                          <Heading size="sm">Telefono</Heading><Text>{item.telefono} </Text>
+                          <Heading size="sm">Correo</Heading><Text>{item.email} </Text>
+                        </VStack> 
+                    </Box>
+                </Box>} keyExtractor={item => item.id} />
+    </NativeBaseProvider>
+    );
+};
 
 export default HomeScreen;
