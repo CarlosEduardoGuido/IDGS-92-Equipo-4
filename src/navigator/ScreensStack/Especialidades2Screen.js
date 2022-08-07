@@ -7,9 +7,10 @@ import {Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, Im
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const baseUrl = "https://consultorio.consultoriosmilestoluca.com/";
-const  DoctoresScreen = ({navigation}) =>{
+const  DoctoresScreen = ({route,navigation}) =>{
     /* loading */
     const [isLoading, setLoading] = useState(true);
+    const {EspecialidadId} = route.params;
 
     /* declaramos nuestro statda date en un state vacio  */
     const [data, setData] = useState([]);
@@ -28,11 +29,15 @@ const  DoctoresScreen = ({navigation}) =>{
  }
  /* inicializamos nuestro useEffect */
  useEffect(() => {getDoctores();}, []);
+    const filtro = data.filter(data => {return data.id_especialidad === EspecialidadId;})
 
     return(
 
     <NativeBaseProvider>
-            <FlatList data={data} renderItem={({
+        <Center>
+            <Heading size="xl">Doctores</Heading>
+        </Center>
+            <FlatList data={filtro} renderItem={({
             item
           }) => 
                 <Box alignItems="center">
@@ -58,7 +63,7 @@ const  DoctoresScreen = ({navigation}) =>{
                           {item.descripcion}
                         </Text>
                       </Stack>
-                      <Button size="sm" onPress={() => {navigation.navigate('Doctores2',{EspecialidadId: item.id_especialidad});}}>Especialidad</Button>
+                      <Button size="sm" onPress={() => {navigation.navigate('Especialidades');}}>Especialidades</Button>
                     </Card>
                   </Box>            
                 </Box>} keyExtractor={item => item.id} />
