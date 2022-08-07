@@ -36,7 +36,7 @@ const  DoctoresScreen = () =>{
             item
           }) => 
                 <Box alignItems="center">
-                  <Box flex={1} maxW="80%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{ borderColor: "coolGray.600",backgroundColor: "gray.700" }} _web={{ shadow: 2,borderWidth: 0 }} _light={{ backgroundColor: "gray.50" }}>
+                  <Box flex={1} maxW="75%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{ borderColor: "coolGray.600",backgroundColor: "gray.700" }} _web={{ shadow: 2,borderWidth: 0 }} _light={{ backgroundColor: "gray.50" }}>
                     <Card>
                       <Box> 
                           <Avatar bg="purple.600" alignSelf="center" size="2xl" source={{uri: item.imagen}} alt="image"  />

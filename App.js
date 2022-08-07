@@ -21,13 +21,6 @@ export default function App() {
           ),
         }} 
       />
-      <Tab.Screen 
-        name="Citas" 
-        component={CitasScreen}options={{tabBarLabel: 'Citas',tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-details" color={color} size={size} />
-          ),
-        }} 
-      />
       
       <Tab.Screen 
         name="Tienda" 

@@ -65,9 +65,24 @@ const  HomeScreen = () =>{
                           </Heading> 
                           </Center>
                           <Text>{item.valores} </Text>
-                          <Heading size="sm">Direccion</Heading><Text>{item.direccion} </Text>
-                          <Heading size="sm">Telefono</Heading><Text>{item.telefono} </Text>
-                          <Heading size="sm">Correo</Heading><Text>{item.email} </Text>
+                          <Center>
+                          <Heading size="sm">
+                            Direccion
+                          </Heading> 
+                          </Center>
+                          <Text>{item.direccion} </Text>
+                          <Center>
+                          <Heading size="sm">
+                            Telefono
+                          </Heading> 
+                          <Text>{item.telefono} </Text>
+                          </Center>
+                          <Center>
+                          <Heading size="sm">
+                            Correo
+                          </Heading> 
+                          <Text>{item.email} </Text>
+                          </Center>
                         </VStack> 
                     </Box>
                 </Box>} keyExtractor={item => item.id} />

@@ -36,7 +36,7 @@ const  APIScreen = () =>{
             item
           }) => 
                 <Box alignItems="center">
-                  <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" >
+                  <Box minW="70%" maxW="71%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" >
                     <Box bg="#FFFFFF">
                       <Card>
                         <Center>
