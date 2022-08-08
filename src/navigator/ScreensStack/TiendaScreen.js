@@ -1,9 +1,9 @@
 /* importar react  */
 import React, { useEffect, useState } from 'react';
 /* importamos los componentes de react */
-import {view,ActivityIndicator} from 'react-native';
+import {view,ActivityIndicator,Alert} from 'react-native';
 /* Importamso NativeBase */
-import {Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, Image,NativeBaseProvider, Card, ScrollView, Button } from "native-base";
+import {Box, FlatList, Heading, Avatar, HStack, VStack, Text, Spacer, Center, Image,NativeBaseProvider, Card, ScrollView, Button,AspectRatio,Stack } from "native-base";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const baseUrl = "https://consultorio.consultoriosmilestoluca.com/";
@@ -31,35 +31,51 @@ const  APIScreen = () =>{
 
     return(
 
-    <NativeBaseProvider>
-            <FlatList data={data} renderItem={({
-            item
-          }) => 
-                <Box alignItems="center">
-                  <Box minW="70%" maxW="71%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" >
-                    <Box bg="#FFFFFF">
-                      <Card>
-                        <Center>
-                          <Image source={{uri: item.imagen}} alt="image" style={{height: 180, width:160}}/>
-                        </Center>
-                        <VStack space="2.5" mt="4" px="10">
-                          <Heading size="sm">
-                            <Text >{item.nombre}</Text>
-                          </Heading>
-                            <Text >{item.detalles} </Text>
-                          <Heading size="sm">
+                <NativeBaseProvider>
+                            <FlatList
+                          data={data}
+                          key={"2"}
+                          numColumns={2}
+                          renderItem={({ item }) => 
+                            <Box>
+                        <Card maxW="200" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+                          borderColor: "coolGray.600",
+                          backgroundColor: "gray.700"
+                        }} _web={{
+                          shadow: 2,
+                          borderWidth: 0
+                        }} _light={{
+                          backgroundColor: "gray.50"
+    }}>
+                              <Image 
+                            source={{uri: item.imagen}}
+                            style={{
+                              width: 180,
+                              height: 220,
+                              borderWidth: 2,
+                              resizeMode: "contain",
+                              margin: 6,
+                            }}
+                                />
+                            <VStack space={1} >
+                            <Heading >                      
+                            <Text fontSize="md" >{item.nombre}</Text>
+                            </Heading>
+                            <Text fontSize="xs">{item.detalles}</Text>
                             <Text>$ {item.precio} </Text>
-                          </Heading>
-                          <Button leftIcon={<MaterialCommunityIcons  size={15} name="cart" type="Ionicons" color="white" />}
+                          <Button onPress={() => Alert.alert("Producto Agregado")} leftIcon={<MaterialCommunityIcons name="cart" type="Ionicons" color="white" />}
                           colorScheme="blue">
                           Agregar
                           </Button>
                         </VStack> 
-                      </Card>
-                    </Box>
-                  </Box>
-                </Box>} keyExtractor={item => item.id} />
-    </NativeBaseProvider>
+                       
+                </Card>
+                </Box>}
+                 
+                  keyExtractor={item => item.id}
+                
+            ></FlatList>
+              </NativeBaseProvider>
     );
 };
 
