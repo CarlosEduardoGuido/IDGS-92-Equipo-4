@@ -17,7 +17,7 @@ const  APIScreen = () =>{
     const getProductos = async () => {
       try {
       //const response = await fetch('https://reactnative.dev/movies.json');
-      const response = await fetch( baseUrl + 'productos',{method:'GET',});
+      const response = await fetch( baseUrl + 'productos2',{method:'GET',});
       const json = await response.json();
       setData(json);
     } catch (error) {
